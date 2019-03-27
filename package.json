@@ -1,0 +1,23 @@
+{
+  "name": "yelp_camp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam1097/YelpCamp.git"
+  },
+  "author": "Shivam Shukla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivam1097/YelpCamp/issues"
+  },
+  "homepage": "https://github.com/shivam1097/YelpCamp#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
