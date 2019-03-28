@@ -3,16 +3,22 @@ var app=express();
 var bodyParser=require("body-parser");
 
 var campgrounds=[
-    {name: "Daisy Mountain" , image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv9n8b2hjD26vxj1jcjSOQk-rgsxZoAvH6LHeUMen7tGOCH6iOww"},
-    {name: "HillSide" , image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ1GBCY_MsQLfN1xEJAuwyB1-td-NJINX7x-LjKq0fz2xuQeeL"}
-    ]
+    {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
+        {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
+        {name: "Mountain Goat's Rest", image: "https://farm7.staticflickr.com/6057/6234565071_4d20668bbd.jpg"},
+        {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
+        {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
+        {name: "Mountain Goat's Rest", image: "https://farm7.staticflickr.com/6057/6234565071_4d20668bbd.jpg"},
+        {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
+        {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
+        {name: "Mountain Goat's Rest", image: "https://farm7.staticflickr.com/6057/6234565071_4d20668bbd.jpg"}    ]
 
 //Using body parser to read data from the parameter send using POST requests.
 app.use(bodyParser.urlencoded({extended:true}))
 app.set("view engine","ejs");
 
 app.get("/",function(req,res){
-    res.send("Working !");
+    res.render("home");
 });
 
 
@@ -32,11 +38,11 @@ app.post("/campground",function(req,res){
     
     var newCamp={name: name, image:image};
     campgrounds.push(newCamp);
-    res.redirect("campgrounds");   // By default it redirect to the route with get method.
+    res.redirect("campground");   // By default it redirect to the route with get method.
     
 })
 
-app.get("/newCampground",function(req,res){
+app.get("/campground/new",function(req,res){
     res.render("new.ejs");
 });
 
