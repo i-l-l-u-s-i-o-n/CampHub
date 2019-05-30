@@ -23,45 +23,53 @@ var data=[
 
 function seedDB() {
     
-    // Remove all campgrounds.
-    Campgrounds.remove({},function(err){
-        if (err) {
-            console.log(err)
-        }else{
-            console.log("Campgrounds removed");
-            
-            // Now add new Campgrounds.
-            
-            data.forEach(function(campground) {
-                Campgrounds.create(campground,function(err,addedCampground){
-                    if (err) {
-                         console.log(err)
-                    }else{
-                        
-                        console.log("Added a new Campground !!");
-                        
-                        // Create a comment 
-                        
-                        Comment.create({
-                            text: "This is a awesome place !",
-                            author: "Shivam"
-                        },function(err, newComment){
-                            if (err) {
-                                console.log(err)
-                            }else{
-                                addedCampground.comments.push(newComment);
-                                addedCampground.save(); // we can also pass a callback as we normally do.
-                                console.log("Created a comment.")
-                                
-                            }
-                        });
-                        
-                        
-                    }
+    // Remove all the comments .
+    
+    Comment.remove({},function(err){
+      if (err) {
+          console.log(err)
+      }  else{
+          // Remove all campgrounds.
+        Campgrounds.remove({},function(err){
+            if (err) {
+                console.log(err)
+            }else{
+                console.log("Campgrounds removed");
+                
+                // Now add new Campgrounds.
+                
+                data.forEach(function(campground) {
+                    Campgrounds.create(campground,function(err,addedCampground){
+                        if (err) {
+                             console.log(err)
+                        }else{
+                            
+                            console.log("Added a new Campground !!");
+                            
+                            // Create a comment 
+                            
+                            Comment.create({
+                                text: "This is a awesome place !",
+                                author: "Shivam"
+                            },function(err, newComment){
+                                if (err) {
+                                    console.log(err)
+                                }else{
+                                    addedCampground.comments.push(newComment);
+                                    addedCampground.save(); // we can also pass a callback as we normally do.
+                                    console.log("Created a comment.")
+                                    
+                                }
+                            });
+                        }
+                    })
                 })
-            })
-        }
-    });
+            }
+        });
+      }
+    })
+    
+    
 }
 
 module.exports = seedDB;

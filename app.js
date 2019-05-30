@@ -7,7 +7,8 @@ var express     = require("express"),
     bodyParser  =require("body-parser"),
     mongoose    = require("mongoose"),
     Campground  =require("./model/campground"),
-    seedDB     =require("./seeds");
+    seedDB     =require("./seeds"),
+    Comment    =require("./model/comments");
     
     
     
@@ -22,38 +23,6 @@ seedDB();
 
 // Connecting to Mongo DB using mongoose.
 mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true })
-
-
-// Adding campgrounds to database.
-
-// Campground.create(
-//     {
-//         name:"Salmon Creek",
-//         image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg",
-//         description: "This is a huge granite hill, no bathrooms,no waters. Just a beautifil granite hill."
-        
-//     },  function(err,campground){
-//             if(err){
-//                 console.log("Can't add capmground"+ err);
-//             }else{
-//                 console.log("Successfully added campground !");
-//                 console.log(campground);
-//             }
-//     })
-
-
-
-
-// var campgrounds=[
-//     {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
-//         {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
-//         {name: "Mountain Goat's Rest", image: "cd"},
-//         {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
-//         {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
-//         {name: "Mountain Goat's Rest", image: "https://farm7.staticflickr.com/6057/6234565071_4d20668bbd.jpg"},
-//         {name: "Salmon Creek", image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg"},
-//         {name: "Granite Hill", image: "https://farm1.staticflickr.com/60/215827008_6489cd30c3.jpg"},
-//         {name: "Mountain Goat's Rest", image: "https://farm7.staticflickr.com/6057/6234565071_4d20668bbd.jpg"}    ]
         
       
       
@@ -130,10 +99,11 @@ app.get("/campgrounds/:id",function(req,res){
     // First we have to find the campground with corresponding ID.
     // Mongoose provide a method for finding record with ID, OR we can simply use find({condition}).
     
-    Campground.findById(req.params.id, function(err, foundCapmground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err,foundCapmground){
         if(err){
             console.log(err);
         }else{
+            console.log(foundCapmground);
             res.render("show", {campground: foundCapmground});
         }
     });
