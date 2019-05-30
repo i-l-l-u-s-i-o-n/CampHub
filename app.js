@@ -5,7 +5,9 @@
 var express     = require("express"),
     app         =express(),
     bodyParser  =require("body-parser"),
-    mongoose    = require("mongoose");
+    mongoose    = require("mongoose"),
+    Campground  =require("./model/campground"),
+    seedDB     =require("./seeds");
     
     
     
@@ -16,22 +18,11 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.set("view engine","ejs");
 
 
+seedDB();
 
 // Connecting to Mongo DB using mongoose.
 mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true })
 
-
-// Schema SETUP
-
-var campgroundSchema =new mongoose.Schema({
-    name:String,
-    image:String,
-    description: String
-});
-
-
-// Compiling schema into MODEL to use various methods.
-var Campground=mongoose.model("Campground",campgroundSchema);
 
 // Adding campgrounds to database.
 
