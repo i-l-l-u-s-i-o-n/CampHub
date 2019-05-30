@@ -26,20 +26,20 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true }
 
 // Adding campgrounds to database.
 
-Campground.create(
-    {
-        name:"Salmon Creek",
-        image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg",
-        description: "This is a huge granite hill, no bathrooms,no waters. Just a beautifil granite hill."
+// Campground.create(
+//     {
+//         name:"Salmon Creek",
+//         image: "https://farm9.staticflickr.com/8442/7962474612_bf2baf67c0.jpg",
+//         description: "This is a huge granite hill, no bathrooms,no waters. Just a beautifil granite hill."
         
-    },  function(err,campground){
-            if(err){
-                console.log("Can't add capmground"+ err);
-            }else{
-                console.log("Successfully added campground !");
-                console.log(campground);
-            }
-    })
+//     },  function(err,campground){
+//             if(err){
+//                 console.log("Can't add capmground"+ err);
+//             }else{
+//                 console.log("Successfully added campground !");
+//                 console.log(campground);
+//             }
+//     })
 
 
 

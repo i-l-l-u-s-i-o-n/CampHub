@@ -45,11 +45,11 @@ function seedDB() {
                         Comment.create({
                             text: "This is a awesome place !",
                             author: "Shivam"
-                        },function(err,newComment){
+                        },function(err, newComment){
                             if (err) {
                                 console.log(err)
                             }else{
-                                addedCampground.coments.push(newComment);
+                                addedCampground.comments.push(newComment);
                                 addedCampground.save(); // we can also pass a callback as we normally do.
                                 console.log("Created a comment.")
                                 
