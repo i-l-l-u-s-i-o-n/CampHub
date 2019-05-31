@@ -34,7 +34,7 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true }
       
       
 app.get("/",function(req,res){
-    res.render("home");
+    res.render("campgrounds/home");
 });
 
 
@@ -48,7 +48,7 @@ app.get("/campgrounds",function(req,res){
         if(err){
             console.log("Can't retrieve!"+err);
         }else{
-            res.render("index",{campgrounds: allCampgrounds});
+            res.render("campgrounds/index",{campgrounds: allCampgrounds});
         }
     })
     
@@ -85,7 +85,7 @@ app.post("/campgrounds",function(req,res){
 
 // NEW route - GET method, Display form to add new campground.
 app.get("/campgrounds/new",function(req,res){
-    res.render("new.ejs");
+    res.render("campgrounds/new.ejs");
 });
 
 
@@ -104,11 +104,64 @@ app.get("/campgrounds/:id",function(req,res){
             console.log(err);
         }else{
             console.log(foundCapmground);
-            res.render("show", {campground: foundCapmground});
+            res.render("campgrounds/show", {campground: foundCapmground});
         }
     });
 })
 
+/////////////////////////////////////////////////     COMMENTS ROUTES         //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Since a comment is associated with post so we can't directly create route as /comments/new ,
+// we have to use a campground id , so the route will be /campground/:id/comments/new.
+
+app.get("/campgrounds/:id/comments/new",function(req,res){
+    
+    // First find the campground with the id in the link and then pass it to the new.ejs
+    Campground.findById(req.params.id,function(err,campground){
+        if (err) {
+            console.log(err)
+        }else{
+            res.render("comments/new",{campground : campground})        
+        }
+    })
+    
+;;})
+
+
+
+app.post("/campgrounds/:id/comments",function(req,res){
+    
+    // First find the campground using ID, to which the comment will be associated.
+    Campground.findById(req.params.id,function(err,campground){
+        if (err) {
+            console.log(err);
+            res.redirect("/campgrounds");
+        }else{
+            
+            // Now create a new comment.
+            Comment.create(req.body.comment,function(err,comment){
+                if (err) {
+                    console.log(err);
+                    res.redirect("/campgrounds");
+                }else{
+                    
+                    // Now add comment to the target campground.
+                    campground.comments.push(comment);
+                    
+                    // Now save the campground.
+                    campground.save();
+                    
+                    // Now redirect to show page with the updated comment.
+                    res.redirect("/campgrounds/"+campground._id);
+                    
+                }
+            })
+            
+            
+        }
+    })
+})
 
 
 
