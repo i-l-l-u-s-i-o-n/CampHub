@@ -27,10 +27,13 @@
                             Submitted by ~ <%= campground.author.username %>
                         </em>
                     </p>
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
                     <a class="btn btn-warning btn-sm " href="/campgrounds/<%= campground._id%>/edit">Edit </a>
-                    <form method="POST"   class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE">
-                        <button  class="btn btn-danger btn-sm " >Delete </button>
+                    <form method="POST"   class="d-inline" act0ion="/campgrounds/<%= campground._id %>?_method=DELETE">
+                        <button  class="btn btn-danger btn-sm ">Delete </button>
                     </form>
+                    <% } %>
+                    
                
                 </div>
             </div>  
@@ -47,6 +50,7 @@
                              <p>
                                  <%= comm.text%> </p>
                              </p>
+                             <a class="btn btn-warning btn-sm " href="/campgrounds/<%= campground._id%>/comments/<%=comm._id%>/edit">Edit </a>
                         </div>
                     </div>
                  <% }) %>

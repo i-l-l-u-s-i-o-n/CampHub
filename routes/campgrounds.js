@@ -71,7 +71,7 @@ router.get("/:id",function(req,res){
 })
 
 // Edit Campground route
-router.get("/:id/edit",function(req, res) {
+router.get("/:id/edit", checkCampgroundOwner,function(req, res) {
     
     // Find campground
     Campground.findById(req.params.id,function(err,foundCamp){
@@ -81,7 +81,7 @@ router.get("/:id/edit",function(req, res) {
         }else{
             res.render("campgrounds/edit",{camp: foundCamp});
         }
-    })
+    });
 
 });
 
@@ -118,6 +118,29 @@ function isLoggedIn(req,res,next){
         return next();
     }
     res.redirect("/login");
+}
+
+
+function checkCampgroundOwner(req,res,next){
+    
+    //If user logged in
+    if(req.isAuthenticated()){
+        
+        Campground.findById(req.params.id, function(err, foundCampground){
+           if(err){
+               res.redirect("back");
+           }  else {
+               // Is the same user who posted the campground.
+            if(foundCampground.author.id.equals(req.user._id)) {
+                next();
+            } else {
+                res.redirect("back");
+            }
+           }
+        });
+    } else {
+        res.redirect("back");   // Redirects to previous page.
+    }
 }
 
 module.exports= router;
