@@ -5,18 +5,19 @@ var express= require("express");
 var router = express.Router();
 
 var Campground=require("../model/campground");
+var middleware = require("../middleware/index.js");
 
 // INDEX route- GET method , shows content  
 router.get("/",function(req,res){
     // Retrieving Campgrounds from database
-    console.log(req.user)
+    console.log(req.user);
     Campground.find({},function(err,allCampgrounds){
         if(err){
             console.log("Can't retrieve!"+err);
         }else{
             res.render("campgrounds/index",{campgrounds: allCampgrounds});
         }
-    })
+    });
     
 });
 
@@ -71,7 +72,7 @@ router.get("/:id",function(req,res){
 })
 
 // Edit Campground route
-router.get("/:id/edit", checkCampgroundOwner,function(req, res) {
+router.get("/:id/edit", middleware.checkCampgroundOwner,function(req, res) {
     
     // Find campground
     Campground.findById(req.params.id,function(err,foundCamp){
@@ -85,7 +86,7 @@ router.get("/:id/edit", checkCampgroundOwner,function(req, res) {
 
 });
 
-router.put("/:id",function(req,res){
+router.put("/:id", middleware.checkCampgroundOwner,function(req,res){
     //Find and update the correct campground.
     Campground.findByIdAndUpdate(req.params.id,req.body.campground,function(err,camp){
         if (err) {
@@ -99,7 +100,7 @@ router.put("/:id",function(req,res){
 
 // DESTROY campground route.
 
-router.delete("/:id",function(req,res){
+router.delete("/:id", middleware.checkCampgroundOwner,function(req,res){
     
     // Find and delete the campground
     Campground.findByIdAndRemove(req.params.id,function(err){
@@ -121,26 +122,7 @@ function isLoggedIn(req,res,next){
 }
 
 
-function checkCampgroundOwner(req,res,next){
-    
-    //If user logged in
-    if(req.isAuthenticated()){
-        
-        Campground.findById(req.params.id, function(err, foundCampground){
-           if(err){
-               res.redirect("back");
-           }  else {
-               // Is the same user who posted the campground.
-            if(foundCampground.author.id.equals(req.user._id)) {
-                next();
-            } else {
-                res.redirect("back");
-            }
-           }
-        });
-    } else {
-        res.redirect("back");   // Redirects to previous page.
-    }
-}
+
+
 
 module.exports= router;

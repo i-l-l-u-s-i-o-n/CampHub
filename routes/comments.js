@@ -8,11 +8,16 @@ var router     = express.Router({mergeParams: true});
 var Campground = require("../model/campground"),
     Comment    = require("../model/comments")
 
+var middleware = require("../middleware/index.js")    
+// We can also include middleware as ->
+// var middleware = require("../middleware"); 
+// Since index.js is a special name of file so sometimes it need not be explicitly mentioned.
+
 
 // Since a comment is associated with post so we can't directly create route as /comments/new ,
 // we have to use a campground id , so the route will be /campground/:id/comments/new.
 
-router.get("/new",isLoggedIn, function(req,res){
+router.get("/new",middleware.isLoggedIn, function(req,res){
     
     // First find the campground with the id in the link and then pass it to the new.ejs
     Campground.findById(req.params.id,function(err,campground){
@@ -27,7 +32,7 @@ router.get("/new",isLoggedIn, function(req,res){
 
 
 // Creates comments
-router.post("/", isLoggedIn,function(req,res){
+router.post("/", middleware.isLoggedIn,function(req,res){
     
     // First find the campground using ID, to which the comment will be associated.
     Campground.findById(req.params.id,function(err,campground){
@@ -68,7 +73,7 @@ router.post("/", isLoggedIn,function(req,res){
 
 
 // EDIT comment route
-router.get("/:comment_id/edit",function(req,res){
+router.get("/:comment_id/edit",middleware.checkCommentOwner, function(req,res){
     
     Comment.findById(req.params.comment_id,function(err,comm){
         if (err) {
@@ -83,7 +88,7 @@ router.get("/:comment_id/edit",function(req,res){
 
 
 //Comment UPDATE route
-router.put("/:comment_id",function(req,res){
+router.put("/:comment_id",middleware.checkCommentOwner,function(req,res){
     
     // Find and update comment using commentId
     
@@ -96,12 +101,21 @@ router.put("/:comment_id",function(req,res){
     })
 })
 
-// Middleware
-function isLoggedIn(req,res,next){
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
+// Delete Comment route.
+router.delete("/:comment_id",middleware.checkCommentOwner,function(req,res){
+    
+    // Find and delete comment
+    Comment.findByIdAndRemove(req.params.comment_id,function(err){
+        if (err) {
+            res.redirect("back");
+        }else{
+            // Find campground and pass it to show template
+            res.redirect("/campgrounds/"+req.params.id)
+        }
+    })
+    
+})
+
+
 
 module.exports= router;
