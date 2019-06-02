@@ -22,6 +22,16 @@
                     <h4 class="float-right">$9.00</h4>
                     <a href=""><h4><%= campground.name %></h4></a>
                     <p><%= campground.description %></p>
+                    <p>
+                        <em>
+                            Submitted by ~ <%= campground.author.username %>
+                        </em>
+                    </p>
+                    <a class="btn btn-warning btn-sm " href="/campgrounds/<%= campground._id%>/edit">Edit </a>
+                    <form method="POST"   class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE">
+                        <button  class="btn btn-danger btn-sm " >Delete </button>
+                    </form>
+               
                 </div>
             </div>  
             <div class="card card-body mt-4" style="background-color:lightgrey;">

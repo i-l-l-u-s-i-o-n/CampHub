@@ -6,6 +6,7 @@ var express             = require("express"),
     app                 = express(),
     bodyParser          = require("body-parser"),
     mongoose            = require("mongoose"),
+    methodOverride      = require("method-override"),
     passport            = require("passport"),
     LocalStrategy       = require ("passport-local"),
     User                = require("./model/user"),
@@ -24,6 +25,10 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // Doing this will consider all the file to be rendered as EJS(embedded JS)
 app.set("view engine","ejs");
+
+
+// Using method-override for PUT and other type of requests.
+app.use(methodOverride("_method"));
 
 
 //Using public directory
