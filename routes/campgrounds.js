@@ -27,7 +27,7 @@ router.get("/",function(req,res){
 // This a RESTful convention to use the same name for the routes for different methods.
 
 // CREATE route - POST method, adds new campground.
-router.post("/",isLoggedIn,function(req,res){
+router.post("/",middleware.isLoggedIn,function(req,res){
     //Using body parser to read data from the parameter send using POST requests.
     var name=req.body.name;
     var image=req.body.url;
@@ -42,6 +42,7 @@ router.post("/",isLoggedIn,function(req,res){
             console.log("Can't add campground !" + err);
         }else{
             console.log("Successfully added ! "+ camp);
+            req.flash("success" ,"Successfully added campground!")
             res.redirect("/campgrounds");   // By default it redirect to the route with get method.
         }
     });
@@ -49,7 +50,7 @@ router.post("/",isLoggedIn,function(req,res){
 
 
 // NEW route - GET method, Display form to add new campground.
-router.get("/new",isLoggedIn, function(req,res){
+router.get("/new",middleware.isLoggedIn, function(req,res){
     res.render("campgrounds/new.ejs");
 });
 
@@ -80,6 +81,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwner,function(req, res) {
             console.log(err);
             res.redirect("/campgrounds");
         }else{
+            
             res.render("campgrounds/edit",{camp: foundCamp});
         }
     });
@@ -92,6 +94,7 @@ router.put("/:id", middleware.checkCampgroundOwner,function(req,res){
         if (err) {
             res.redirect("/campgrounds")
         }else{
+            req.flash("success" ,"Successfully updated campground!")
             res.redirect("/campgrounds/"+req.params.id);
         }
     })
@@ -108,18 +111,12 @@ router.delete("/:id", middleware.checkCampgroundOwner,function(req,res){
             res.redirect("/campgrounds");
         }
         else{
+            req.flash("success" ,"Successfully deleted campground!")
             res.redirect("/campgrounds")
         }
     })
 });
 
-// Middleware
-function isLoggedIn(req,res,next){
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
 
 
 

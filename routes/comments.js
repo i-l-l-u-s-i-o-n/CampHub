@@ -45,6 +45,7 @@ router.post("/", middleware.isLoggedIn,function(req,res){
             Comment.create(req.body.comment,function(err,comment){
                 if (err) {
                     console.log(err);
+                    req.flash("error" ,"Something went wrong!")
                     res.redirect("/campgrounds");
                 }else{
                     
@@ -61,10 +62,10 @@ router.post("/", middleware.isLoggedIn,function(req,res){
                     
                     // Now save the campground.
                     campground.save();
+                    req.flash("success" ,"Successfully added comment!")
                     
                     // Now redirect to show page with the updated comment.
-                    res.redirect("/campgrounds/"+campground._id);
-                    
+                    res.redirect("/campgrounds/"+campground._id);                 
                 }
             });
         }
@@ -96,6 +97,7 @@ router.put("/:comment_id",middleware.checkCommentOwner,function(req,res){
         if (err) {
             res.redirect("back");
         }else{
+            req.flash("success" ,"Successfully updated comment!")
             res.redirect("/campgrounds/"+req.params.id);
         }
     })
@@ -109,6 +111,7 @@ router.delete("/:comment_id",middleware.checkCommentOwner,function(req,res){
         if (err) {
             res.redirect("back");
         }else{
+            req.flash("success" ,"Successfully deleted comment!")
             // Find campground and pass it to show template
             res.redirect("/campgrounds/"+req.params.id)
         }

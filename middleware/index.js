@@ -13,17 +13,20 @@ middleObjects.checkCampgroundOwner =  function(req,res,next){
         
         Campground.findById(req.params.id, function(err, foundCampground){
            if(err){
+               req.flash("error" ,"Something went wrong!")
                res.redirect("back");
            }  else {
                // Is the same user who posted the campground.
             if(foundCampground.author.id.equals(req.user._id)) {
                 next();
             } else {
+                req.flash("error" ,"You don't have permission to do that!")
                 res.redirect("back");
             }
            }
         });
     } else {
+        req.flash("error" , "You must be logged in !")
         res.redirect("back");   // Redirects to previous page.
     }
 }
@@ -35,17 +38,20 @@ middleObjects.checkCommentOwner = function(req,res,next){
         
         Comment.findById(req.params.comment_id, function(err, foundComment){
            if(err){
+               req.flash("error" ,"Something went wrong!")
                res.redirect("back");
            }  else {
                // Is the same user who posted the campground.
                 if(foundComment.author.id.equals(req.user._id)) {
                     next();
                 } else {
+                    req.flash("error" ,"You don't have permission to do that!")
                     res.redirect("back");
                 }
            }
         });
     } else {
+        req.flash("error" , "You must be logged in !")
         res.redirect("back");   // Redirects to previous page.
     }
 }
