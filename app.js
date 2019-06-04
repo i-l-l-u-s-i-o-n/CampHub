@@ -7,6 +7,7 @@ var express             = require("express"),
     bodyParser          = require("body-parser"),
     mongoose            = require("mongoose"),
     methodOverride      = require("method-override"),
+    flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require ("passport-local"),
     User                = require("./model/user"),
@@ -52,6 +53,7 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash);
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

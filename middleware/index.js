@@ -54,6 +54,11 @@ middleObjects.isLoggedIn = function(req,res,next){
     if (req.isAuthenticated()) {
         return next();
     }
+    
+    // Here we are using flash message . It takes parameter as key value pair.
+    // It will be displayed on the nect page . So we have to pass req.flash("error") to the login page.     
+    req.flash("error", "You must be logged in!");
+
     res.redirect("/login");
 }
 
