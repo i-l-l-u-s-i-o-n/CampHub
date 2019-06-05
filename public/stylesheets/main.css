@@ -6,3 +6,61 @@
 .img-thumbnail{
     padding:0;
 }
+
+.jumbotron{
+    background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+    /*background-image:url(https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);*/
+    background-position: center;
+    background-size: cover;
+    color:white;
+    
+}
+body{
+     font-family: Montserrat;
+     background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+     background-image: url("back.jpg");
+     background-size:cover;
+    /*background: #544a7d; */
+/*background: -webkit-linear-gradient(to right, #ffd452, #544a7d);  */
+/*background: linear-gradient(to right, #ffd452, #544a7d); */
+}
+
+/* on scrolling, navbar takes purple color . This reqires javascript to 
+detect when user has scrolled and a class in css. */
+.navbar.scrolled{
+background-color: #000000;
+background-image: linear-gradient(315deg, #000000 75%, #414141 0%);
+    transition: background 1ms;
+    color:white;
+}
+.navbar{
+    height:50px;
+}
+
+
+#btn-black{
+    background:#222;
+    color:white;
+}
+
+#block{
+    width: 50%; 
+    height:50% ; 
+    margin: 25px auto; 
+    background:white;
+}
+strong{
+    color:white;
+}
+.card-body{
+    background-color: #000000;
+background-image: linear-gradient(315deg, #000000 60%, #414141 0%);
+    transition: background 1ms;
+    color:white;
+
+}
+.card-title{
+        letter-spacing:1px;
+    word-spacing:3px;
+    text-transform:uppercase;
+}

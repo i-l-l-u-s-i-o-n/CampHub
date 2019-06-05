@@ -5,38 +5,33 @@
     
     <header class="jumbotron">
         <div class="container">
-            <H1>Welcome to YelpCamp</H1>
-            <p>View our hand picked campgrounds from all over the world !</p>
+            <H1>Welcome to YelpCamp <i class="fas fa-campground"></i></H1>
+            
+            <p class="">View our hand picked campgrounds from all over the world !</p>
             <p>
-                <a href="/campgrounds/new" class="btn btn-primary"> Add New campground</a>
+                <a href="/campgrounds/new" class="btn btn-success rounded-pill " > Add New campground  &nbsp;<i class="fas fa-plus-circle"></i> </a>
             </p>
         </div>
     </header>
     
-    <!--<div class="row justify-content-around">-->
-        
-    <!--    <% campgrounds.forEach(function(campground){ %>-->
-        
-    <!--    <div class="col-md-3 col-sm-6">-->
-
-    <!--        <h2><%= campground.name %></h2>-->
-    <!--        <div class="img-thumbnail" style="height:200px; width:200px">-->
-    <!--            <img src="<%= campground.image %>"></img>-->
-    <!--        </div>-->
-            
-    <!--    </div>-->
-    <!--    <% }); %>-->
-
-    <!--</div>-->
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <div class="col-md-12">
+            <% if(noMatch !== null) { %>
+                <h3><%= noMatch %></h3>
+            <% } %>
+        </div>
+    </div>
     
-    <div class="row ">
+    
+    <div class="row  d-flex justify-content-around">
         <% campgrounds.forEach(function(campground){ %>
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card">
                   <img class="card-img-top" style="height:200px;" src="<%= campground.image %>" alt="<%= campground.name %>">
                   <div class="card-body">
                     <h5 class="card-title"><%= campground.name %></h5>
-                    <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
+                    <p><em>Price : $<%= campground.price%> /night</em></p>
+                    <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary rounded-pill">Know more <i class="ml-2 fas fa-chevron-right"></i></a>
                   </div>
                 </div>
             </div>

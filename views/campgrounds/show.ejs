@@ -3,28 +3,30 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <p class-"lead">
-                YelpCamp
-            </p>
-            <div class="list-group">
-                <li class="list-group-item active">Info</li>
-                <li class="list-group-item">Info</li>
-                <li class="list-group-item">Info</li>
-            </div>
-        </div>
+    <div class="row justify-content-around">
+        <!--<div class="col-md-3">-->
+        <!--    <p class-"lead">-->
+        <!--        YelpCamp-->
+        <!--    </p>-->
+        <!--    <div class="list-group">-->
+        <!--        <li class="list-group-item active">Info</li>-->
+        <!--        <li class="list-group-item">Info</li>-->
+        <!--        <li class="list-group-item">Info</li>-->
+        <!--    </div>-->
+        <!--</div>-->
         
-        <div class= " col-md-9">
+        <div class= " col-md-11">
             <div class="img-thumbnail">
                 <img class="img-fluid rounded mx-auto d-block" src="<%= campground.image %>">
                 <div class="p-3">
-                    <h4 class="float-right">$<%= campground.price %></h4>
+                    <h4 class="float-right">$<%= campground.price %> / night</h4>
                     <a href=""><h4><%= campground.name %></h4></a>
                     <p><%= campground.description %></p>
+                    <hr>
                     <p>
                        <em>Submitted by : <%= campground.author.username %> <span class="float-right"><%= moment(campground.createdAt).fromNow() %></span></em>
                     </p>
+                    <hr>
                     <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
                         <a class="btn btn-warning btn-sm " href="/campgrounds/<%= campground._id%>/edit">Edit </a>
                         <form method="POST"   class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE">

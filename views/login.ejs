@@ -8,8 +8,8 @@
 <!--</form>-->
 <!--<div class="container">-->
 <!--<div class="row">-->
-    <h1 class="text-center display-4 m-5">Login to YelpCamp</h1>
-    <div style="width: 30%; margin: 25px auto;">
+    <div id="block" class="p-4">
+    <h3 class="text-center m-5">Login to YelpCamp</h3>
         <form action="/login" method="post">
             <div class="form-group">
                 <input class="form-control" type="text" name="username" placeholder="Username">
@@ -21,7 +21,8 @@
                 <button class="btn btn-lg btn-primary btn-block">Login</button>
             </div>
         </form>
-        <a href="/campgrounds">Go Back</a>
+        <a href="/campgrounds" class="d-inline">Go Back</a>
+        <a class="float-right d-inline" href="/forgot">Forgot password?</a>
     </div>
 <!--</div>-->
 <!--</div>-->
