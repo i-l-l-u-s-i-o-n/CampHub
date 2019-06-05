@@ -12,7 +12,7 @@ middleObjects.checkCampgroundOwner =  function(req,res,next){
     if(req.isAuthenticated()){
         
         Campground.findById(req.params.id, function(err, foundCampground){
-           if(err){
+           if(err || !foundCampground){
                req.flash("error" ,"Something went wrong!")
                res.redirect("back");
            }  else {

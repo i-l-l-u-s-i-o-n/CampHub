@@ -3,12 +3,15 @@ var express  = require("express");
 // Here we are using express router insted of app itself.
 var router   = express.Router();
 
-var passport = require("passport"),
-    User     = require("../model/user");
+var passport            = require("passport"),
+    User                = require("../model/user"),
+    async               = require("async"),
+    nodemailer          = require("nodemailer"),
+    crypto              = require("crypto");
 
 // Root route    
 router.get("/",function(req,res){
-    res.render("campgrounds/home");
+    res.render("landing");
 });
 
 // Show signup form
@@ -25,9 +28,11 @@ router.post("/register",function(req,res){
     User.register(newUser, req.body.password, function(err, user){
         if (err) {
             console.log(err)
+            req.flash("error", err.message);
             return res.render("register");
         }
         passport.authenticate("local")(req,res, function(){
+            req.flash("success", "Welcome to YelpCamp "+ user.username );
             res.redirect("/campgrounds")
         });
     });
@@ -53,5 +58,10 @@ router.get("/logout", function(req,res){
     res.redirect("/campgrounds");
 })
 
+
+// Password Forgot
+router.get("/forgot",function(req,res){
+    res.render("forgot");
+})
 
 module.exports= router;

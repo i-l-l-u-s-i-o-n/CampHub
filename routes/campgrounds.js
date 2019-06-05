@@ -30,11 +30,12 @@ router.get("/",function(req,res){
 router.post("/",middleware.isLoggedIn,function(req,res){
     //Using body parser to read data from the parameter send using POST requests.
     var name=req.body.name;
+    var price=req.body.price;
     var image=req.body.url;
     var decription=req.body.description;
     var author= { id: req.user._id, username:req.user.username};
     
-    var newCamp={name: name, image:image, description:decription, author: author};
+    var newCamp={name: name, image:image, description:decription, author: author, price: price};
     
     // Adding new Campground.
     Campground.create(newCamp, function(err,camp){
@@ -63,8 +64,10 @@ router.get("/:id",function(req,res){
     // First we have to find the campground with corresponding ID.
     // Mongoose provide a method for finding record with ID, OR we can simply use find({condition}).
     Campground.findById(req.params.id).populate("comments").exec(function(err,foundCapmground){
-        if(err){
+        if(err || !foundCapmground){
             console.log(err);
+            req.flash("error","Campground not found !")
+            res.redirect("/campgrounds")
         }else{
             console.log(foundCapmground);
             res.render("campgrounds/show", {campground: foundCapmground});
