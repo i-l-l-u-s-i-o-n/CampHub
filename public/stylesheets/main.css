@@ -28,19 +28,26 @@ body{
 /* on scrolling, navbar takes purple color . This reqires javascript to 
 detect when user has scrolled and a class in css. */
 .navbar.scrolled{
-background-color: #000000;
-background-image: linear-gradient(315deg, #000000 75%, #414141 0%);
-    transition: background 1ms;
+/*background-color: #000000;*/
+/*background-image: linear-gradient(315deg, #000000 75%, #414141 0%);*/
+/*    transition: background 1ms;*/
+    /*background: #212121;*/
+    background-image: url("back.jpg");
+    
     color:white;
 }
 .navbar{
     height:50px;
 }
-
-
-#btn-black{
-    background:#222;
+#brand{
     color:white;
+}
+#btn-green{
+    background:#99ffb7;
+    color:black;
+}
+.btn-blue{
+    background:#7ce6ea;
 }
 
 #block{
@@ -48,9 +55,6 @@ background-image: linear-gradient(315deg, #000000 75%, #414141 0%);
     height:50% ; 
     margin: 25px auto; 
     background:white;
-}
-strong{
-    color:white;
 }
 .card-body{
     background-color: #000000;
@@ -63,4 +67,7 @@ background-image: linear-gradient(315deg, #000000 60%, #414141 0%);
         letter-spacing:1px;
     word-spacing:3px;
     text-transform:uppercase;
+}
+.card{
+    border:none;
 }
