@@ -121,7 +121,9 @@ router.delete("/:id", middleware.checkCampgroundOwner,function(req,res){
 });
 
 
-
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 
 
