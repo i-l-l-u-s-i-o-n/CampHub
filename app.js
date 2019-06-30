@@ -38,7 +38,8 @@ app.use(express.static(__dirname + "/public"));
 
 
 // Connecting to Mongo DB using mongoose.
-mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true })
+// mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true })
+mongoose.connect("mongodb+srv://shivam:Shivam22%40@cluster0-p07bd.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true })
         
   
   
