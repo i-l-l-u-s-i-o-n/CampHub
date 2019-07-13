@@ -6,13 +6,13 @@
 ---
 ## Used following npm packages ->
 
-* ### body-parser
+* ## body-parser
 For parsing the POST request parameters.
 
-* ### connect-flash
+* ## connect-flash
 Used for displaying the falsh messages, when the user logs in, signs out, adds new campground or comment to the campground. 
 
-* ### ejs
+* ## ejs
 The template for the project is EJS(Embedded JavaScript)
 
 * ## express
