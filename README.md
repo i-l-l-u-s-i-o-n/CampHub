@@ -59,7 +59,7 @@ Used these 3 packages for user authorisation.
 * ## Campgrounds Page
 ![Screenshot (766)](https://user-images.githubusercontent.com/40165451/60397408-a34bc000-9b6a-11e9-8401-4461430c5be3.png)
 
-![Screenshot (767)](https://user-images.githubusercontent.com/40165451/60397409-a34bc000-9b6a-11e9-8ca2-81e5e66fc8d0.png)
+![Screenshot (827)](https://user-images.githubusercontent.com/40165451/61697072-2b7d4980-ad54-11e9-830b-22b364bb42ca.png)
 
 * ## Campground details and comments
 ![Screenshot (775)](https://user-images.githubusercontent.com/40165451/60397547-e5293600-9b6b-11e9-830d-7dd745c4328f.png)
