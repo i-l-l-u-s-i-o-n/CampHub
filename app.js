@@ -90,7 +90,6 @@ app.use("/campgrounds",campgroundsRoutes);
 app.use("/campgrounds/:id/comments",commentRoutes);
 
 
-// Starting server on c9 port.
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(3000,function(){
     console.log("SERVER STARTED!"); 
 });

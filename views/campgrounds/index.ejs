@@ -7,7 +7,7 @@
         <div class="container">
             <H1>Welcome to CapmHub <i class="fas fa-campground"></i></H1>
             
-            <p class="">View our hand picked campgrounds from all over India !</p>
+            <p class="">View our hand picked campgrounds from all over World !</p>
             <p>
                 <a href="/campgrounds/new" class="btn rounded-pill " id="btn-green" > Add New campground  &nbsp;<i class="fas fa-plus-circle"></i> </a>
             </p>
@@ -30,7 +30,7 @@
                   <img class="card-img-top" style="height:200px;" src="<%= campground.image %>" alt="<%= campground.name %>">
                   <div class="card-body">
                     <h5 class="card-title"><%= campground.name %></h5>
-                    <p><em>Price : ₹<%= campground.price%> /night</em></p>
+                    <p><em>Price : <%= campground.price%> $/night</em></p>
                     <a href="/campgrounds/<%= campground._id %>" class="btn btn-blue rounded-pill">Know more <i class="ml-2 fas fa-chevron-right"></i></a>
                   </div>
                 </div>
