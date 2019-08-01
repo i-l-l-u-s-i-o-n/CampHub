@@ -1,6 +1,6 @@
 # CampHub  /_\ 
 
-##### A place to find, post, review, serch campgrounds in India !
+##### A place to find, post, review, serch campgrounds !
 
 ## Link - http://camphub.herokuapp.com/
 ---
