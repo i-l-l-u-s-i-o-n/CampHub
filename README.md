@@ -1,6 +1,6 @@
 # CampHub  /_\ 
 
-##### A place to find, post, review, serch campgrounds !
+##### A place to find, post, review, search campgrounds !
 
 ## Link - http://camphub.herokuapp.com/
 ---
