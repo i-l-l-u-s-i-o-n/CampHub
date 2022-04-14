@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/shivam1097/YelpCamp#readme",
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.2",
